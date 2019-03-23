@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<title>EL briškoler</title>
+<body>	
+
+<form action="{% url 'shrani' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
+	<table>
+	{% for field in form %}
+		<tr><th>{{field.label_tag}}</th><td>{{field}}{{field.errors}}</td></tr>
+	{% endfor %}
+	</table>
+	<button type="submit" class="save btn btn-default">Save</button>
+</form>
+
+</body>
+</html>
+
