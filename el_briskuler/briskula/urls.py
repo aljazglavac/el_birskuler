@@ -1,7 +1,8 @@
 from django.urls import path
 
-from .views import shrani_uporabnika as su
+from .views import shrani_uporabnika, najdi_udelezence
 
 urlpatterns = [
-    path('shrani', su, name='shrani'),
+    path('shrani', shrani_uporabnika, name='shrani'),
+    path('turnir/<int:turnir_id>/info', najdi_udelezence, name='turnir'),
 ]

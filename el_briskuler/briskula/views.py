@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Uporabniki
+from .models import Uporabniki, Turnir
 from .forms import UporabnikiForm
 from django.conf import settings
 
@@ -22,3 +22,15 @@ def shrani_uporabnika(request):
     if request.method == 'POST':
         UporabnikiForm(request.POST, request.FILES).save()
     return redirect('/')
+
+
+def najdi_udelezence(request, turnir_id):
+    turnir = Turnir.objects.get(pk=turnir_id)
+    uporabniki = Uporabniki.objects.filter(turnir=turnir)
+
+    context = {
+        'udelezenci': uporabniki,
+        'turnir' : turnir,
+    }
+
+    return render(request, 'briskula/info.html', context)
