@@ -1,19 +1,27 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Uporabniki
+from .models import Uporabniki, Turnir
 from .forms import UporabnikiForm
 from django.conf import settings
+from django.db.models import Sum
 
 
 def index(request):
-    uporabniki = Uporabniki.objects.all()
-    top3 = uporabniki[:3]
     form = UporabnikiForm()
+    t = Turnir.objects.all()
+    prih = t.filter(status=True)
+    pret = t.filter(status=False)
+    zadnji = t.first()
+    raz = Uporabniki.objects \
+            .values('ime') \
+            .annotate(tocke=Sum('tocke'))
     context = {
-        'ranking': uporabniki,
         'form': form,
         'media_url': settings.MEDIA_URL,
-        'top3': top3
+        'prihajajoci': prih,
+        'pretekli': pret,
+        'zadnji': zadnji,
+        'razvrstitev': raz,
     }
     return render(request, 'briskula/index.html', context)
 

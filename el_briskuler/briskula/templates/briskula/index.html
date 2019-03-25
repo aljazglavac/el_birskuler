@@ -2,6 +2,22 @@
 <html>
 	<title>EL briškoler</title>
 <body>	
+	<h3> Prihajajoci turnirji </h3>
+	{% for p in prihajajoci %}
+		<h4> {{ p }} </h4>
+	{% endfor %}
+	<hr>
+	<h3> Pretekli turnirji </h3>
+	{% for p in pretekli %}
+		<h4> {{ p }} </h4>
+	{% endfor %}
+	<hr>
+	<h3> Zadnji turnir: {{ zadnji }} </h3>
+	<hr>
+	<h3> Skupna razvrstitev </h3>
+	{% for r in razvrstitev %}
+		<h4>{{ r.ime }} -- {{ r.tocke }}</h4>
+	{% endfor %}
 
 <form action="{% url 'shrani' %}" method="post" enctype="multipart/form-data">{% csrf_token %}
 	<table>
