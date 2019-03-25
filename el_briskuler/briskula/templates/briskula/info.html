@@ -1,4 +1,26 @@
+{% load static %}
 
+<link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<style>
+th.title1 {
+    font-size: 120px;
+    height: 300px;
+}
+th.title2 {
+    font-size: 70px;
+    height: 300px;
+    
+}
+th.title3 {
+    font-size: 50px;
+    height: 200px;
+}
+th.title3 {
+    font-size: 30px;
+    height: 50px;
+}
+</style>
 <h1 align="center">{{turnir}}</h1>
 <br>
 <br>
@@ -6,9 +28,33 @@
 <table style="width:50%" align="center">
     {% for udelezenec in udelezenci %}
     <tr>
-        <th>{{ forloop.counter }}</th>
-        <th>{{ udelezenec.ime }}</th>
-        <th>{{ udelezenec.tocke }}</th>
+        <th 
+            {% if forloop.counter <= 4 %} {% 
+                class = "title{{forloop.counter}}" %}
+            {% endif %}>
+            {% if forloop.counter == 1%}
+            <img src="{% static 'gold.png' %}" height="160px"/>
+            {% elif forloop.counter == 2 %}
+            <img src="{% static 'silver.png' %}" height="160px"/>
+            {% elif forloop.counter == 3 %}
+            <img src="{% static 'bronze.png' %}" height="160px"/>
+            {% else %}
+            {{ forloop.counter }}
+            {% endif %}
+            
+        </th>
+        <th 
+            {% if forloop.counter <= 4 %} {% 
+                class = "title{{forloop.counter}}" %}
+            {% endif %}>
+            {{ udelezenec.ime }}
+        </th>
+        <th 
+            {% if forloop.counter <= 4 %} {% 
+                class = "title{{forloop.counter}}" %}
+            {% endif %}>
+            {{ udelezenec.tocke }}
+        </th>
     </tr>
     {% endfor %}
 </table>
