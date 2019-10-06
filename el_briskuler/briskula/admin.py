@@ -20,7 +20,7 @@ class TurnirAdmin(admin.ModelAdmin):
                 obj.status = False
                 obj.save()
         else:
-            super(TurnirAdmin, self).save_model(self, request, obj, form, change)
+            super(TurnirAdmin, self).save_model(request, obj, form, change)
 
 
 admin.site.register(Uporabniki, UporabnikiAdmin)

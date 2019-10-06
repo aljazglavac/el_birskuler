@@ -1,0 +1,76 @@
+{% load static %}
+{% get_media_prefix as MEDIA_URL %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/demo.css' %}" />
+<script type="text/javascript" src="{% static 'js/jquery.min.js' %}"></script>
+<style>
+    th.title1 {
+        font-size: 120px;
+        height: 300px;
+    }
+
+    th.title2 {
+        font-size: 70px;
+        height: 300px;
+
+    }
+
+    th.title3 {
+        font-size: 50px;
+        height: 200px;
+    }
+
+    th.title4 {
+        font-size: 30px;
+        height: 50px;
+    }
+
+    table,
+    th,
+    td {
+        margin-left: auto;
+        border-collapse: collapse;
+        width: 50%;
+    }
+</style>
+<h1 align="center">{{turnir}} INFO </h1>
+<br>
+<br>
+
+<table align="center">
+    {% for udelezenec in udelezenci %}
+    <tr>
+        <th {% if forloop.counter < 4 %} class="title{{forloop.counter}}" {% else %} class="title4" {% endif %}>
+            {% if forloop.counter == 1%}
+            <img align="center" src="{% static 'gold.png' %}" style="max-height:160px;" />
+            {% elif forloop.counter == 2 %}
+            <img align=" center" src="{% static 'silver.png' %}" style="max-height:160px;" />
+            {% elif forloop.counter == 3 %}
+            <img align="center" src="{% static 'bronze.png' %}" style="max-height:160px;" />
+
+            {% else %}
+            {{ forloop.counter }}
+            {% endif %}
+        </th>
+        <th {% if forloop.counter < 4 %} class="title{{forloop.counter}}" style="padding-left: 20px" {% else %}
+            class="title4" {% endif %}>
+            {{ udelezenec.ime }}
+        </th>
+        <th {% if forloop.counter < 4 %} class="title{{forloop.counter}}" style="padding-left: 20px" {% else %}
+            class="title4" {% endif %}>
+            {{ udelezenec.tocke }}
+        </th>
+        <th {% if forloop.counter < 4 %} class="title{{forloop.counter}}" {% else %} class="title4" {% endif %}>
+            {% if forloop.counter == 1%}
+            <img src="{{ MEDIA_URL }}{{ udelezenec.slika }}" style="max-height:160px;padding-left: 50px">
+            {% elif forloop.counter == 2 %}
+            <img src="{{ MEDIA_URL }}{{ udelezenec.slika }}" style="max-height:160px;padding-left: 50px">
+            {% elif forloop.counter == 3 %}
+            <img src="{{ MEDIA_URL }}{{ udelezenec.slika }} " style="max-height:160px;padding-left: 50px">
+            {% endif %}
+
+
+        </th>
+    </tr>
+    {% endfor %}
+</table>
